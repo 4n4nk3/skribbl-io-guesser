@@ -1,6 +1,28 @@
-from time import sleep
+import argparse
 from re import findall
+from time import sleep
+
 from selenium import webdriver
+
+
+def init_argparse() -> argparse.ArgumentParser:
+    """Define and manage arguments passed to guesser via terminal."""
+    parser = argparse.ArgumentParser(
+        description='A simple selenium automation to win at https://skribble.io game.')
+    required = parser.add_argument_group('required arguments')
+    required.add_argument('--lang', help='Select desired language (eng, ger)',
+                          required=True)
+    return parser
+
+
+args = init_argparse().parse_args()
+if args.lang == 'eng':
+    lang = 'English'
+elif args.lang == 'ger':
+    lang = 'German'
+else:
+    print('Specified lang not found')
+    exit(0)
 
 
 def build_my_regexp(word: str) -> str:
@@ -19,12 +41,12 @@ def build_my_regexp(word: str) -> str:
 def search_wordlist(current_regexp: str) -> set:
     """Return a set of lowercase matching words because the website is case-insensitive)."""
 
-    with open('English_wordlist.txt', 'r') as in_file:
+    with open(f'{lang}_wordlist.txt', 'r') as in_file:
         wordlist = set(map(str.lower, findall(current_regexp, in_file.read())))
     return wordlist
 
 
-def try_and_guess(driver, word):
+def try_and_guess(driver, word: str) -> bool:
     sleep(0.5)
     guess_form = driver.find_element_by_id('inputChat')
     guess_form.send_keys(word)
@@ -68,7 +90,6 @@ def play_to_win(driver) -> str:
                     if current_word != old_word:
                         break
     return old_word
-
 
 
 if __name__ == '__main__':

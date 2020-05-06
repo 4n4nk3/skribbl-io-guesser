@@ -1,4 +1,7 @@
+"""Scrape wordlists collected by skibbliohints.github.io"""
+
 from time import sleep
+
 from selenium import webdriver
 
 if __name__ == '__main__':
@@ -19,6 +22,7 @@ if __name__ == '__main__':
         lang = possibility.get_attribute('value')
         words_elements = my_driver.find_elements_by_class_name("b")
         my_words_extractor = (element.get_attribute('innerHTML') for element in words_elements)
+        # Create a different file for each language
         with open(f'{lang}_wordlist.txt', 'w') as out_file:
             for word in my_words_extractor:
                 out_file.write(f'{word}\n')
