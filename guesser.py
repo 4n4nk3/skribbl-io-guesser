@@ -8,7 +8,7 @@ from selenium import webdriver
 def init_argparse() -> argparse.ArgumentParser:
     """Define and manage arguments passed to guesser via terminal."""
     parser = argparse.ArgumentParser(
-        description='A simple selenium automation to win at https://skribble.io game.')
+        description='A simple selenium automation to win at https://skribbl.io game.')
     required = parser.add_argument_group('required arguments')
     required.add_argument('--lang', help='Select desired language (eng, ger)',
                           required=True)
