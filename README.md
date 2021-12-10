@@ -1,6 +1,6 @@
 # skribbl-io-guesser
 A simple selenium automation written in python 3.8 to win at [skribbl.io](https://skribbl.io/) games.
-I wrote this simple script to show to my girlfriend's little sister, a passionate _skribbl.io_
+I wrote this simple script to show to my ex-girlfriend's little sister, a passionate _skribbl.io_
 player, how funny can programming actually be.
 
 ### Supported languages:
